@@ -12,8 +12,9 @@ namespace SoftSMS.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        public bool LoginMethod(string Login)
+        public bool Login(string Login)
         { return true; }
     }
 }

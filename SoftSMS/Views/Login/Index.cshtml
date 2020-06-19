@@ -1,9 +1,12 @@
 ﻿@model UsersViewModel
 @{
+    Layout = "SoftDev";
     ViewData["Title"] = "Home Page";
 }
+<link href="@Url.Content("~/css/login.css")" rel="stylesheet" type="text/css" />
 <h2>Se connecter</h2>
 <div class="text-center">
+    
     @using (Html.BeginForm("Users", "LoginController", FormMethod.Post))
     {<table border="0" cellpadding="6">
             <tr><td>Login</td><td>@Html.TextBoxFor(model => model.Login)</td></tr>
@@ -13,4 +16,6 @@
      <button type="submit" value="Se connecter">Se connecter</button>
     }
 
+
 </div>
+<div>RenderBody</div>
