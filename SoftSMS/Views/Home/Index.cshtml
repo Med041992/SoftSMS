@@ -1,0 +1,16 @@
+﻿@model UsersViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h2>Se connecter</h2>
+<div class="text-center">
+    @using (Html.BeginForm("Users", "LoginController", FormMethod.Post))
+    {<table border="0" cellpadding="6">
+            <tr><td>Login</td><td>@Html.TextBoxFor(model => model.Login)</td></tr>
+            <tr><td>Mot de passe</td><td><input type="text" name="Password" /></td></tr>
+            <tr><td colspan="2"><input type="checkbox" name="StayConnected" />Rester connecté</td></tr>
+        </table>
+     <button type="submit" value="Se connecter">Se connecter</button>
+    }
+
+</div>
