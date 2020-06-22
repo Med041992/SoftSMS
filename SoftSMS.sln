@@ -3,17 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoftSMS", "SoftSMS\SoftSMS.csproj", "{EA7C761B-D43F-4AC6-ACEE-EF7CBD6D62C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoftSMS.MVC", "SoftSMS\SoftSMS.MVC.csproj", "{EA7C761B-D43F-4AC6-ACEE-EF7CBD6D62C1}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B01D0E31-CF8C-4BA3-875B-3BBD9FEAB6E9} = {B01D0E31-CF8C-4BA3-875B-3BBD9FEAB6E9}
+		{14B64CFA-3A9E-4563-B71C-007F6D32D620} = {14B64CFA-3A9E-4563-B71C-007F6D32D620}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftSMS.Data", "SoftSMS.Data\SoftSMS.Data.csproj", "{5BEFFB43-B1FD-4A8A-A23F-0D75C1CF7CED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoftSMS.Infrastructure", "SoftSMS.Infrastructure\SoftSMS.Infrastructure.csproj", "{B01D0E31-CF8C-4BA3-875B-3BBD9FEAB6E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftSMS.Infrastructure", "SoftSMS.Infrastructure\SoftSMS.Infrastructure.csproj", "{B01D0E31-CF8C-4BA3-875B-3BBD9FEAB6E9}"
-	ProjectSection(ProjectDependencies) = postProject
-		{5BEFFB43-B1FD-4A8A-A23F-0D75C1CF7CED} = {5BEFFB43-B1FD-4A8A-A23F-0D75C1CF7CED}
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoftSMS.Data", "SoftSMS.Data\SoftSMS.Data.csproj", "{14B64CFA-3A9E-4563-B71C-007F6D32D620}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +23,14 @@ Global
 		{EA7C761B-D43F-4AC6-ACEE-EF7CBD6D62C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA7C761B-D43F-4AC6-ACEE-EF7CBD6D62C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA7C761B-D43F-4AC6-ACEE-EF7CBD6D62C1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5BEFFB43-B1FD-4A8A-A23F-0D75C1CF7CED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5BEFFB43-B1FD-4A8A-A23F-0D75C1CF7CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5BEFFB43-B1FD-4A8A-A23F-0D75C1CF7CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5BEFFB43-B1FD-4A8A-A23F-0D75C1CF7CED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B01D0E31-CF8C-4BA3-875B-3BBD9FEAB6E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B01D0E31-CF8C-4BA3-875B-3BBD9FEAB6E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B01D0E31-CF8C-4BA3-875B-3BBD9FEAB6E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B01D0E31-CF8C-4BA3-875B-3BBD9FEAB6E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14B64CFA-3A9E-4563-B71C-007F6D32D620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14B64CFA-3A9E-4563-B71C-007F6D32D620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14B64CFA-3A9E-4563-B71C-007F6D32D620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14B64CFA-3A9E-4563-B71C-007F6D32D620}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

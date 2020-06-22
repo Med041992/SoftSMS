@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication1.Models
+namespace SoftSMS.Data.Entity
 {
     public class Template : EntityBase
     {
@@ -18,9 +18,9 @@ namespace WebApplication1.Models
         public int NbVariables { get; set; }
         [ForeignKey("Group")]
         public int IDGrp { get; set; }
-        [ForeignKey("Users")]
-        public int IDUser { get; set; }
+        [ForeignKey("ListUsers")]
+        public Guid IDUser { get; set; }
         public DateTime Date { get; set; }
-        public virtual List<Group> IDGroup { get; set; }
+        public long Phone { get; set; }
     }
 }

@@ -5,13 +5,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication1.Models
+namespace SoftSMS.Data.Entity
 {
     public class Group : EntityBase
     {
         
         [DataType(DataType.Text)]
         public string Name { get; set; }
-        public List<MembershipAssociation> MembershipAssociation { get; set; }
+        public List<MembershipAssociations> MembershipAssociation { get; set; }
     }
 }
