@@ -20,6 +20,7 @@ namespace SoftSMS.MVC.ViewModels
         [ForeignKey("Users")]
         public int IDUser { get; set; }
         public DateTime Date { get; set; }
+        public long Phone { get; set; }
         public virtual List<GroupViewModel> IDGroup { get; set; }
     }
 }
