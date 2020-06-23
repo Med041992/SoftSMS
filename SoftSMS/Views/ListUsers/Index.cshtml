@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SoftSMS.Data.Entity.ListUsers>
+﻿@model IEnumerable<UsersViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -52,9 +52,9 @@
                         @Html.DisplayFor(modelItem => item.Profil)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">éditer</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Détails</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
+                        <a asp-action="Edit" asp-route-id="@item.IDUser">éditer</a> |
+                        <a asp-action="Details" asp-route-id="@item.IDUser">Détails</a> |
+                        <a asp-action="Delete" asp-route-id="@item.IDUser">Supprimer</a>
                     </td>
                 </tr>
             }
