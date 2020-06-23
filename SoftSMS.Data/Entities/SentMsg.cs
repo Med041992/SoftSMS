@@ -12,10 +12,10 @@ namespace SoftSMS.Data.Entity
     public class SentMsg : EntityBase
     {
         
-        [ForeignKey("Template")]
-        public int IdTemplate { get; set; }
-        [ForeignKey("ListUsers")]
-        public Guid IdUser { get; set; }
+        
+        //public int IdTemplate { get; set; }
+        
+        //public Guid IdUser { get; set; }
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
         public StatusEnum Status { get; set; }

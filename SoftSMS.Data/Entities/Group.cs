@@ -13,5 +13,6 @@ namespace SoftSMS.Data.Entity
         [DataType(DataType.Text)]
         public string Name { get; set; }
         public List<MembershipAssociations> MembershipAssociation { get; set; }
+        public virtual ICollection<Template> TemplateNavigation { get; set; }
     }
 }

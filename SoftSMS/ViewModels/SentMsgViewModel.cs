@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication1.Models
+namespace SoftSMS.MVC.ViewModels
 { public enum StatusEnum
     { Pending,Received}
     public class SentMsgViewModel

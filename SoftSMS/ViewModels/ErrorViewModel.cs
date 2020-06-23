@@ -1,6 +1,6 @@
 using System;
 
-namespace WebApplication1.Models
+namespace SoftSMS.MVC.ViewModels
 {
     public class ErrorViewModel
     {

@@ -4,20 +4,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication1.Models
+namespace SoftSMS.MVC.ViewModels
 {  public enum StatusType
     { Banned,Registered,Normal,Warned}
     public enum ProfilType
     { Admin,Manager,Agent}
     public class UsersViewModel
     { 
-        public int IDUser { get; set; }
-        [DataType(DataType.Text)]
+        public Guid IDUser { get; set; }
         public string FirstName { get; set; }
-        [DataType(DataType.Text)]
         public string LastName { get; set; }
-        [DataType(DataType.Text)]
-        [Required]
         public string Login { get; set; }
         public StatusType Status { get; set; }
         public ProfilType Profil { get; set; }
