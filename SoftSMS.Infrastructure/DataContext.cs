@@ -13,6 +13,11 @@ namespace SoftSMS.Infrastructure
         {
 
         }
+
+        public DataContext()
+        {
+        }
+
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
             base.OnModelCreating(modelbuilder);

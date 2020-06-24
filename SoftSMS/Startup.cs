@@ -2,13 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
+using SoftSMS.Data.Entities;
 using SoftSMS.Data.Interfaces;
 using SoftSMS.Infrastructure;
 using SoftSMS.Infrastructure.UnitOfWork;
@@ -29,11 +35,54 @@ namespace WebApplication1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+           /* services.AddControllersWithViews();
             services.AddDbContext<DataContext>(options =>
             { options.UseSqlServer(Configuration.GetConnectionString("SoftSMSDB"));
                 services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
-            });
+            });*/
+            
+                GlobalVariable.ConnectionString = Configuration.GetConnectionString("DB");
+
+                services.Configure<CookiePolicyOptions>(options =>
+                {
+                    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                    options.CheckConsentNeeded = context => true;
+                    options.MinimumSameSitePolicy = SameSiteMode.None;
+                });
+
+                //services.AddDbContext<TP_SMSContext>(options => options.UseSqlServer(GlobalVariable.ConnectionString));
+                services.AddMvc(options =>
+                {
+                    options.EnableEndpointRouting = false;
+
+                }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+                services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options => options.AccessDeniedPath = "/Account/Denied");
+
+                services.AddAuthorization(options =>
+                {
+                    options.AddPolicy("Invio_SMS", policy =>
+                    {
+                        policy.RequireAssertion(context => checkUserPolicy(context, "Invio_SMS"));
+                    });
+                    options.AddPolicy("Lavora_SMS", policy =>
+                    {
+                        policy.RequireAssertion(context => checkUserPolicy(context, "Lavora_SMS"));
+                    });
+                    options.AddPolicy("Report_SMS", policy =>
+                    {
+                        policy.RequireAssertion(context => checkUserPolicy(context, "Report_SMS"));
+                    });
+                    options.AddPolicy("Dashboard", policy =>
+                    {
+                        policy.RequireAssertion(context => checkUserPolicy(context, "Dashboard"));
+                    });
+                    options.AddPolicy("Gestione_Utenze", policy =>
+                    {
+                        policy.RequireAssertion(context => checkUserPolicy(context, "Gestione_Utenze"));
+                    });
+                });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -99,6 +148,35 @@ namespace WebApplication1
                     pattern: "{controller=SMS}/{action=WritePredef}/{id?}");
             });
             
+        }
+        private bool checkUserPolicy(AuthorizationHandlerContext context, string permissionName)
+        {
+            var result = false;
+            try
+            {
+                string nome = context.User.Identity.Name.Split("\\").Last();
+                int[] PermissionsOnRole = { };
+                int permissionId = 0;
+
+                using (var db = new DataContext())
+                {
+                    /*permissionId = db.SmsPermissions.First(s => s.PerName.Equals(permissionName)).PerId;
+                    int roleId = db.SmsUserRole.First(s => s.UroAgentLogin.Equals(nome) && s.UroActive.Equals(true)).UroFkRolId;
+                    PermissionsOnRole = db.SmsRolesPermissions.Where(prm => prm.RpeFkRolId == roleId).Select(e => e.RpeFkPerId).ToArray();*/
+                }
+                if (PermissionsOnRole.Contains(permissionId))
+                {
+                    result = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Fatal($"Problem with checking permission{permissionName} for user {context.User.Identity.Name} \n\t Message: {ex.Message} " +
+                    $"\n\t StackTrace: {ex.StackTrace}");
+                result = false;
+            }
+
+            return result;
         }
     }
 }

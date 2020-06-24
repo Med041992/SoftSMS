@@ -123,7 +123,7 @@ namespace SoftSMS.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "FirstName", "LastName", "Login", "Profil", "Status" },
-                values: new object[] { new Guid("b3c89077-9212-4308-a040-6f3dcf688287"), "Teleperformance Tunisie", "", "Admin", 0, 2 });
+                values: new object[] { new Guid("1b0b3585-fc20-4053-bb52-7f3e6c1a7149"), "Teleperformance Tunisie", "", "Admin", 0, 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_MembershipAssociations_IdGrp",

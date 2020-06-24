@@ -64,7 +64,7 @@ namespace SoftSMS.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b3c89077-9212-4308-a040-6f3dcf688287"),
+                            Id = new Guid("1b0b3585-fc20-4053-bb52-7f3e6c1a7149"),
                             FirstName = "Teleperformance Tunisie",
                             LastName = "",
                             Login = "Admin",
