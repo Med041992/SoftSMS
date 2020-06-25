@@ -9,7 +9,7 @@ using SoftSMS.Data.Entity;
 using SoftSMS.Data.Interfaces;
 using SoftSMS.MVC.ViewModels;
 
-namespace WebApplication1.Controllers
+namespace SoftSMS.MVC.Controllers
 {
     public class HomeController : Controller
     {
