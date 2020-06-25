@@ -34,13 +34,21 @@ namespace SoftSMS.MVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           /* services.AddControllersWithViews();
-            services.AddDbContext<DataContext>(options =>
-            { options.UseSqlServer(Configuration.GetConnectionString("SoftSMSDB"));
-                services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
-            });*/
-            
-                GlobalVariable.ConnectionString = Configuration.GetConnectionString("DB");
+            /* services.AddControllersWithViews();
+             services.AddDbContext<DataContext>(options =>
+             { options.UseSqlServer(Configuration.GetConnectionString("SoftSMSDB"));
+                 services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+             });*/
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            GlobalVariable.ConnectionString = Configuration.GetConnectionString("DB");
 
                 services.Configure<CookiePolicyOptions>(options =>
                 {
@@ -103,6 +111,7 @@ namespace SoftSMS.MVC
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
