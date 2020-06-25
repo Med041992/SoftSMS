@@ -12,11 +12,8 @@ namespace SoftSMS.MVC.ViewModels
     public class SentMsgViewModel
     {
         public int IDSentMsg { get; set; }
-        [ForeignKey("Template")]
         public int IDTemplate { get; set; }
-        [ForeignKey("Users")]
         public int IDUser { get; set; }
-        [DataType(DataType.Date)]
         public DateTime Date { get; set; }
         public StatusEnum Status { get; set; }
         public List<UsersViewModel> Owned { get; set; }
