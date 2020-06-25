@@ -11,13 +11,13 @@ namespace SoftSMS.Controllers
 {
     public class LoginController : Controller
     {
-        string Host = "localhost";
-        int Port = 10389;
-        string login = "admin";
-        string Category = "system";
-        string Password = "secret";
-        string Company = "Company";
-        string searchFilter = "objectClass=inetOrgPerson";
+        //string Host = "localhost";
+        //int Port = 10389;
+        //string login = "admin";
+        //string Category = "system";
+        //string Password = "secret";
+        //string Company = "Company";
+        //string searchFilter = "objectClass=inetOrgPerson";
         public string userList(string ldapHost = "localhost", int ldapPort = 10389, string loginDN = "uid=admin,ou=system", string password = "secret", string searchBase = "ou=users,o=Company", string searchFilter = "objectClass=inetOrgPerson")
         {
             try
@@ -34,7 +34,8 @@ namespace SoftSMS.Controllers
             {
                 return "error " + e.Message;
             } }
-                public IActionResult Index()
+        [HttpPost]
+        public IActionResult Index(string Host = "localhost", int Port = 10389, string login = "admin",string Category, string Password = "secret", string Company="Company", string searchFilter = "objectClass=inetOrgPerson")
         {
             string Result = userList(Host,(int)Port, ("uid=" + login + ",ou=" + Category), Password,"ou=users,o="+Company, searchFilter);
             if (Result == "success") {
