@@ -1,4 +1,4 @@
-/// <reference path="../scripts/typings/sweetalert/sweetalert.d.ts" />
+/// <reference path="../scripts/sweetalert.d.ts" />
 var TPClient;
 (function (TPClient) {
     var Commons = (function () {

@@ -18,9 +18,8 @@ using SoftSMS.Data.Entities;
 using SoftSMS.Data.Interfaces;
 using SoftSMS.Infrastructure;
 using SoftSMS.Infrastructure.UnitOfWork;
-using WebApplication1.Controllers;
 
-namespace WebApplication1
+namespace SoftSMS.MVC
 {
     public class Startup
     {
