@@ -1,188 +1,44 @@
-@font-face {
-  font-family: 'Noto Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Noto Sans'), local('NotoSans'), url(Notosans.ttf) format('truetype');
+body {
+    position: absolute;
+    width: 1237px;
+    height: 724px;
+    left: 63px;
+    top: 36px;
+    background: #FFFFFF;
+    border: 1px solid #7BE6F9;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
 }
-@font-face {
-  font-family: 'Noto Sans';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Noto Sans Bold'), local('NotoSans-Bold'), url(NotosansBold.ttf) format('truetype');
-}
-* {
-  font-family: 'Noto Sans';
-}
-.logo h2 {
-  position: relative;
-  text-indent: -5000px;
-  width: 186px;
-  height: 38px;
-  margin: 80px auto;
-}
-.logo h2::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 38px;
-  width: 186px;
-  background-image: url(TP_Client.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-div.message {
-  margin: 0 auto;
-  padding: 0;
-  width: 300px;
-  font-size: 12px;
-  font-weight: 400;
-  padding: 0 0 20px 0;
-}
-div.message.success {
-  color: green;
-}
-div.message.error {
-  color: red;
-}
-.form {
-    position: center;
-  margin: 0 auto;
-  padding: 0;
-  width: 300px;
-}
-.form fieldset {
-    position:center;
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-.form.login fieldset div {
-  padding: 16px 0 0 0;
-}
-.form.login fieldset div input,
-.form.login fieldset div input[type=submit] {
-  border-radius: 6px;
-  padding: 12px 14px;
-  box-sizing: border-box;
-  width: 100%;
-}
-.form.login fieldset div input {
-  border: 1px solid #DADADA;
-  background: #F8F8F8;
-  font-size: 14px;
-}
-.form.login fieldset div input::placeholder {
-  color: #000000;
-}
-.form.login fieldset div input[type=submit] {
-  background: #0087FF;
-  text-transform: uppercase;
-  color: #FFFFFF;
-  border: none;
-  box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.18);
-  margin-top: 50px;
-  cursor: pointer;
-}
-.form.language {
-  margin-top: 120px;
-}
-.form.language fieldset div select {
-  font-size: 11px;
-  border: none;
-}
-ul.links {
-  margin: 14px auto 0;
-  padding: 0;
-  width: 300px;
-  list-style-type: none;
-  text-align: right;
-}
-ul.links li {
-  display: inline-block;
-  margin-left: 8px;
-}
-ul.links li a,
-ul.links li button {
-  color: #000000;
-  font-size: 11px;
-  text-decoration: none;
-}
-ul.links li a:hover,
-ul.links li button:hover,
-ul.links li a:focus,
-ul.links li button:focus {
-  color: #0087FF;
-}
-ul.links li button {
-  border: none;
-  background: rgba(0, 0, 0, 0);
-  padding: 0;
-  cursor: pointer;
-}
-div.about {
-  margin: 14px auto 0;
-  padding: 0;
-  width: 300px;
-  text-align: right;
-  font-size: 11px;
-}
-div.about h3 {
-  font-size: 11px;
-  font-weight: 700;
-  padding: 0;
-  margin: 0;
-}
-div.about p {
-  padding: 0;
-  margin: 0;
-}
-div.about p + h3 {
-  padding-top: 8px;
-}
-div.footer {
-  margin: 14px auto 0;
-  padding: 0 0 28px 0;
-  width: 300px;
-  position: relative;
-  clear: both;
-}
-div.footer::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 33px;
-  height: 29px;
-  content: '';
-  background-image: url(tp_blue_logo.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-div.footer p {
-  margin: 0;
-  text-align: right;
-  font-size: 11px;
+h2 {
+    position: absolute;
+    width: 203px;
+    height: 81px;
+    left: 153px;
+    top: 248px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 75px;
+    color: #000000;
 }
 input {
-    position: center;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-font-smoothing: antialiased;
-    color: inherit;
-    font: inherit;
-    margin: 0;
-    font-family: inherit;
-    line-height: inherit;
-    border-radius: 6px;
-    padding: 12px 14px;
+    position: absolute;
+    width: 384px;
+    height: 38px;
+    left: 153px;
+    top: 367px;
+    border: 1px solid #56EBFF;
     box-sizing: border-box;
-    width: 100%;
-    border: 1px solid #DADADA;
-    background: #F8F8F8;
-    font-size: 14px;
+    border-radius: 10px;
 }
-.tbl{
-    position: center;
-}
-.txtbox {
-    position:center
+button {
+    position: absolute;
+    width: 439px;
+    height: 47px;
+    left: 153px;
+    top: 527px;
+    background: linear-gradient(259.39deg, #45E9FF 0%, rgba(99, 236, 255, 0.881777) 17.41%, rgba(113, 238, 255, 0.942259) 25.4%, rgba(21, 170, 217, 0.39) 99.75%);
+    border-radius: 10px;
 }

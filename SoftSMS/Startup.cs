@@ -14,10 +14,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using SoftSMS.Data.Data;
 using SoftSMS.Data.Entities;
 using SoftSMS.Data.Interfaces;
-using SoftSMS.Infrastructure;
-using SoftSMS.Infrastructure.UnitOfWork;
 
 namespace SoftSMS.MVC
 {

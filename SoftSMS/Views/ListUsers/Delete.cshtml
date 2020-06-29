@@ -25,10 +25,10 @@
             @Html.DisplayFor(model => model.LastName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Login)
+            @Html.DisplayNameFor(model => model.UserName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Login)
+            @Html.DisplayFor(model => model.UserName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Status)
@@ -45,7 +45,7 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="IDUser" />
+        <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
         <a asp-action="Index">Back to List</a>
     </form>

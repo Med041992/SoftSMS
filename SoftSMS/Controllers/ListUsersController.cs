@@ -2,18 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ServiceReferenceAuthentication;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using SoftSMS.Data.Data;
+using SoftSMS.Data.Entities;
 using SoftSMS.Data.Entity;
 using SoftSMS.Data.Interfaces;
-using SoftSMS.Infrastructure;
 using SoftSMS.MVC.ViewModels;
 
 namespace SoftSMS.MVC.Controllers
 {
     public class ListUsersController : Controller
     {
+        private readonly DataContext _context;
+        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly UserManager<ListUsers> userManager;
+        private readonly IConfiguration configuration;
         private readonly IUnitOfWork<ListUsers> _users;
 
         //private readonly DataContext _context;
@@ -31,14 +41,15 @@ namespace SoftSMS.MVC.Controllers
         }
 
         // GET: ListUsers/Details/5
-        public IActionResult Details(Guid? id)
+        public async Task<IActionResult> DetailsAsync(Guid? id)
         {
+            
             if (id == null)
             {
                 return NotFound();
             }
 
-            var listUsers = _users.Entity.GetById(id);
+            var listUsers = await userManager.FindByIdAsync(id.ToString());
             /*await _context.Users
             .FirstOrDefaultAsync(m => m.Id == id);*/
             if (listUsers == null)
@@ -60,28 +71,70 @@ namespace SoftSMS.MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FirstName,LastName,Login,Status,Profil,Id")] ListUsers listUsers)
+        public async Task<IActionResult> Create([Bind("Id,UserName,FirstName,LastName,Profil,IsActive")] ListUsers listUsers)
         {
-            if (ModelState.IsValid)
+            try
             {
-                /*listUsers.Id = Guid.NewGuid();
-                _context.Add(listUsers);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));*/
-                ListUsers listUsers1 = new ListUsers
+                TPFAuthenticationSoapClient.EndpointConfiguration endpointConfiguration = new TPFAuthenticationSoapClient.EndpointConfiguration();
+                TPFAuthenticationSoapClient servAuth = new TPFAuthenticationSoapClient(endpointConfiguration);
+                if ((Boolean)TempData["isValid"] == false)
                 {
-                    FirstName = listUsers.FirstName,
-                    LastName = listUsers.LastName,
-                    Login = listUsers.Login,
-                    Profil = listUsers.Profil,
-                    Status = listUsers.Status,
-                    MembershipAssociation=listUsers.MembershipAssociation
-                };
-                _users.Entity.Insert(listUsers1);
-                _users.Save();
-                return RedirectToAction(nameof(Index));
+                    IdentityUser u = await userManager.FindByNameAsync(listUsers.UserName);
+
+                    if (u != null)
+                    {
+                        ViewBag.IsValid = false;
+                        ModelState.AddModelError(string.Empty, "Ce Compte existe déja");
+                    }
+
+                    else
+                    {
+                        GetEmployeeByLoginResponseGetEmployeeByLoginResult x = await servAuth.GetEmployeeByLoginAsync(configuration.GetSection("MySettings").GetSection("login").Value, configuration.GetSection("MySettings").GetSection("pwd").Value, listUsers.UserName);
+
+
+                        if (x != null)
+                        {
+                            System.Xml.Linq.XElement b = x.Any1;
+                            ViewBag.Result1 = b.Descendants("employee_common_name").First().Value;
+                            ViewBag.IsValid = true;
+
+                            listUsers.Id = b.Descendants("employee_ident").First().Value;
+                            listUsers.FirstName = b.Descendants("employee_first_name").First().Value;
+                            listUsers.LastName = b.Descendants("employee_last_name").First().Value;
+                            //listUsers.FullName = b.Descendants("employee_common_name").First().Value;
+                            //listUsers.Email = b.Descendants("email1").First().Value;
+
+
+                            return View(listUsers);
+                        }
+                        else
+                        {
+                            Tools.Log(listUsers.UserName);
+                            ViewBag.IsValid = false;
+                            ModelState.AddModelError(string.Empty, "Compte Inexistant!");
+                            //return View(user);
+
+                        }
+                    }
+                }
+                else
+                {
+                    ListUsers myuser = new ListUsers { UserName = listUsers.UserName, Email = listUsers.Email, Id = listUsers.Id, FirstName = listUsers.FirstName, LastName = listUsers.LastName };
+                    await userManager.CreateAsync(myuser);
+                    await userManager.AddToRoleAsync(myuser, "Manager");
+
+                    Tools.Historique(User.Identity.Name, "Creation d'utilisateur", "Success", "", myuser.UserName);
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(listUsers);
+
             }
-            return View(listUsers);
+            catch (Exception ex)
+            {
+                Tools.Log("UsersController, Post Create, Utilisateur (" + User.Identity.Name + ") : " + ex.ToString());
+                TempData["errorMessage"] = "Impossible de creer l'utilisateur";
+                return RedirectToAction(nameof(Create));
+            }
         }
 
         // GET: ListUsers/Edit/5
@@ -103,9 +156,8 @@ namespace SoftSMS.MVC.Controllers
                 Id=listUsers.Id,
                 FirstName = listUsers.FirstName,
                 LastName = listUsers.LastName,
-                Login = listUsers.Login,
+                UserName = listUsers.UserName,
                 Profil = listUsers.Profil,
-                Status = listUsers.Status,
                 MembershipAssociation = listUsers.MembershipAssociation
             };
             return View(listUsers);
@@ -118,7 +170,7 @@ namespace SoftSMS.MVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Guid id,UsersViewModel model)
         {
-            if (!id.Equals(model.IDUser))
+            if (!id.Equals(model.Id))
             {
                 return NotFound();
             }
@@ -137,9 +189,8 @@ namespace SoftSMS.MVC.Controllers
                         {
                             FirstName = model.FirstName,
                             LastName = model.LastName,
-                            Login = model.Login,
+                            UserName = model.UserName,
                             Profil = (Data.Entity.ProfilType)model.Profil,
-                            Status = (Data.Entity.StatusType)model.Status,
                             MembershipAssociation = (ICollection<MembershipAssociations>)model.MembershipAssociation
                         };
                         _users.Entity.Update(listUsers1);
@@ -148,7 +199,7 @@ namespace SoftSMS.MVC.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ListUsersExists(model.IDUser))
+                    if (!ListUsersExists(model.Id.ToString()))
                     {
                         return NotFound();
                     }
@@ -194,7 +245,7 @@ namespace SoftSMS.MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ListUsersExists(Guid id)
+        private bool ListUsersExists(string id)
         {
             return _users.Entity.GetAll().Any(e => e.Id == id);
         }

@@ -1,0 +1,28 @@
+﻿{
+  "ProviderId": "Microsoft.VisualStudio.ConnectedService.Wcf",
+  "Version": "15.0.40203.910",
+  "GettingStartedDocument": {
+    "Uri": "https://go.microsoft.com/fwlink/?linkid=858517"
+  },
+  "ExtendedData": {
+    "inputs": [
+      "https://public-test.teleperformance.fr/TPFAuthentication/TPFAuthentication.asmx"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "namespaceMappings": [
+      "*, Authentification"
+    ],
+    "references": [
+      "Microsoft.AspNetCore.Html.Abstractions, {Microsoft.AspNetCore.Html.Abstractions, 2.2.0}",
+      "Microsoft.Extensions.Logging.Abstractions, {Microsoft.Extensions.Logging.Abstractions, 3.1.5}",
+      "System.ComponentModel.Annotations, {System.ComponentModel.Annotations, 4.7.0}",
+      "System.Text.Encodings.Web, {System.Text.Encodings.Web, 4.5.0}"
+    ],
+    "sync": true,
+    "targetFramework": "netstandard2.0",
+    "typeReuseMode": "All"
+  }
+}

@@ -24,10 +24,10 @@
             @Html.DisplayFor(model => model.LastName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Login)
+            @Html.DisplayNameFor(model => model.UserName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Login)
+            @Html.DisplayFor(model => model.UserName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Status)
@@ -44,6 +44,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.IDUser">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

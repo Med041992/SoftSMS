@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SoftSMS.Data.Entity;
-using SoftSMS.Infrastructure;
-
+using SoftSMS.Data.Data;
 namespace SoftSMS.MVC.Controllers
 {
     public class TemplatesController : Controller
